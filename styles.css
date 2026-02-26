@@ -124,3 +124,112 @@ footer {
   font-size: 0.8rem;
   text-align: center;
 }
+
+/* ── Utility ── */
+.hidden { display: none !important; }
+
+/* ── Section panel (shared) ── */
+.section-panel {
+  margin-top: 0;
+}
+
+/* ── Back button ── */
+.btn-back {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-back:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+/* ── Section heading ── */
+.section-title {
+  color: #fff;
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.section-subtitle {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+/* ── Polynomial display box ── */
+.poly-box {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+.poly-equation {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.06em;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* ── Controls ── */
+.poly-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.btn-action {
+  padding: 0.6rem 1.4rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-action:hover {
+  background: rgba(255,255,255,0.22);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+.btn-action:active { transform: translateY(0); }
+
+.btn-primary {
+  background: rgba(123, 47, 247, 0.55);
+  border-color: rgba(123, 47, 247, 0.8);
+}
+.btn-primary:hover {
+  background: rgba(123, 47, 247, 0.75);
+}
+
+/* ── Answer / hint text ── */
+.poly-hint {
+  text-align: center;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.9rem;
+  min-height: 1.2em;
+}
+.poly-answer {
+  text-align: center;
+  color: #7fffb0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  background: rgba(0,200,100,0.1);
+  border: 1px solid rgba(0,200,100,0.25);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}

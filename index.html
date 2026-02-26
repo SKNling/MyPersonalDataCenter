@@ -24,6 +24,25 @@
     </nav>
   </main>
 
+  <!-- ── Math Section ── -->
+  <section id="math-section" class="glass-panel section-panel hidden" aria-label="Math – Polynomial Factoring">
+    <button class="btn-back" aria-label="Back to menu">&larr; Back</button>
+    <h2 class="section-title">🧮 Polynomial Factoring Practice</h2>
+    <p class="section-subtitle">Factor the quadratic equation below and find its solutions.</p>
+
+    <div class="poly-box" aria-live="polite">
+      <span id="poly-equation" class="poly-equation"></span>
+    </div>
+
+    <div class="poly-controls">
+      <button id="btn-show-answer" class="btn-action">Show Answer</button>
+      <button id="btn-new-equation" class="btn-action btn-primary">New Equation</button>
+    </div>
+
+    <p id="poly-hint" class="poly-hint"></p>
+    <p id="poly-answer" class="poly-answer hidden" aria-live="polite"></p>
+  </section>
+
   <footer><p>My Personal Data Center &mdash; more features coming soon</p></footer>
 
   <script src="script.js"></script>
