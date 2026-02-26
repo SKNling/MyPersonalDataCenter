@@ -4,134 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Personal Data Center</title>
-  <style>
-    /* ── Reset & base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      min-height: 100vh;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    /* ── Decorative blobs behind the glass ── */
-    body::before,
-    body::after {
-      content: '';
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.35;
-      pointer-events: none;
-    }
-    body::before {
-      width: 500px; height: 500px;
-      background: #7b2ff7;
-      top: -150px; left: -150px;
-    }
-    body::after {
-      width: 400px; height: 400px;
-      background: #0ff;
-      bottom: -120px; right: -100px;
-    }
-
-    /* ── Header ── */
-    header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-      color: #fff;
-    }
-    header h1 {
-      font-size: clamp(1.6rem, 4vw, 2.6rem);
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-    }
-    header p {
-      margin-top: 0.4rem;
-      font-size: 1rem;
-      color: rgba(255,255,255,0.6);
-    }
-
-    /* ── Glass card wrapper ── */
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      width: 100%;
-      max-width: 860px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-
-    /* ── Menu grid ── */
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.25rem;
-    }
-
-    /* ── Individual menu item ── */
-    .menu-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 1.75rem 1rem;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 14px;
-      color: #fff;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-      user-select: none;
-    }
-    .menu-item:hover {
-      background: rgba(255, 255, 255, 0.18);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    }
-    .menu-item:active {
-      transform: translateY(-1px);
-    }
-
-    .menu-item .icon {
-      font-size: 2.4rem;
-      line-height: 1;
-    }
-    .menu-item .label {
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      text-align: center;
-    }
-    .menu-item .badge {
-      font-size: 0.7rem;
-      font-weight: 500;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.05em;
-    }
-
-    /* ── Footer ── */
-    footer {
-      margin-top: 1.75rem;
-      color: rgba(255,255,255,0.35);
-      font-size: 0.8rem;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -153,5 +26,6 @@
 
   <footer><p>My Personal Data Center &mdash; more features coming soon</p></footer>
 
+  <script src="script.js"></script>
 </body>
 </html>
