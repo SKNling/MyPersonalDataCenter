@@ -338,6 +338,59 @@ function updateDayBadge(dayEl) {
   });
 })();
 
+// ── Per-task time recording ───────────────────────────────────────────────────
+
+var TASK_TIME_KEY = 'task-times';
+
+/** Load saved per-task time values from localStorage. */
+function loadTaskTimes() {
+  try { return JSON.parse(localStorage.getItem(TASK_TIME_KEY)) || {}; } catch (e) { return {}; }
+}
+
+/** Save per-task time values to localStorage. */
+function saveTaskTimes(times) {
+  localStorage.setItem(TASK_TIME_KEY, JSON.stringify(times));
+}
+
+/** Inject time-recording text boxes beside each schedule task. */
+(function initTaskTimeInputs() {
+  var saved = loadTaskTimes();
+  var days = document.querySelectorAll('#alevel-math1-section .schedule-day');
+
+  days.forEach(function (dayEl, dayIdx) {
+    var items = dayEl.querySelectorAll('.day-tasks li');
+    items.forEach(function (li, taskIdx) {
+      var id = 'd' + dayIdx + 't' + taskIdx;
+
+      var wrapper = document.createElement('span');
+      wrapper.className = 'task-time-wrapper';
+
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'task-time-input';
+      input.placeholder = 'Time';
+      input.title = 'Record your completion time (e.g. 30m, 1h15m)';
+      input.dataset.taskId = id;
+      if (saved[id]) {
+        input.value = saved[id];
+      }
+
+      input.addEventListener('input', function () {
+        var times = loadTaskTimes();
+        if (input.value.trim()) {
+          times[id] = input.value.trim();
+        } else {
+          delete times[id];
+        }
+        saveTaskTimes(times);
+      });
+
+      wrapper.appendChild(input);
+      li.appendChild(wrapper);
+    });
+  });
+})();
+
 // ── Study time recorder ──────────────────────────────────────────────────────
 
 var TIMER_KEY = 'study-timer';

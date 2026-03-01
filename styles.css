@@ -357,6 +357,35 @@ footer {
   text-decoration: line-through;
 }
 
+/* ── Per-task time input ── */
+.task-time-wrapper {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.task-time-input {
+  width: 5.5rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.78rem;
+  font-family: inherit;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.task-time-input::placeholder {
+  color: rgba(255,255,255,0.3);
+  font-style: italic;
+}
+.task-time-input:focus {
+  border-color: rgba(180, 200, 255, 0.6);
+  background: rgba(255,255,255,0.12);
+}
+
 /* ── Day completion badge ── */
 .day-badge {
   display: inline-block;
