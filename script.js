@@ -268,3 +268,182 @@ document.querySelectorAll('#alevel-math1-section .day-tasks li').forEach(functio
     }
   }
 });
+
+// ── Checkbox function ────────────────────────────────────────────────────────
+
+var CHECKBOX_KEY = 'schedule-checkboxes';
+
+/** Load saved checkbox states from localStorage. */
+function loadCheckboxState() {
+  try { return JSON.parse(localStorage.getItem(CHECKBOX_KEY)) || {}; } catch (e) { return {}; }
+}
+
+/** Save checkbox states to localStorage. */
+function saveCheckboxState(state) {
+  localStorage.setItem(CHECKBOX_KEY, JSON.stringify(state));
+}
+
+/** Update the completion badge for a day card. */
+function updateDayBadge(dayEl) {
+  var items = dayEl.querySelectorAll('.day-tasks li');
+  if (!items.length) return;
+  var done = 0;
+  items.forEach(function (li) { if (li.classList.contains('task-done')) done++; });
+  var badge = dayEl.querySelector('.day-badge');
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.className = 'day-badge';
+    dayEl.querySelector('.day-heading').appendChild(badge);
+  }
+  badge.textContent = done + '/' + items.length;
+  badge.classList.toggle('all-done', done === items.length);
+}
+
+/** Inject checkboxes into every schedule task <li>. */
+(function initCheckboxes() {
+  var saved = loadCheckboxState();
+  var days = document.querySelectorAll('#alevel-math1-section .schedule-day');
+
+  days.forEach(function (dayEl, dayIdx) {
+    var items = dayEl.querySelectorAll('.day-tasks li');
+    items.forEach(function (li, taskIdx) {
+      var id = 'd' + dayIdx + 't' + taskIdx;
+
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'task-checkbox';
+      cb.dataset.taskId = id;
+      if (saved[id]) {
+        cb.checked = true;
+        li.classList.add('task-done');
+      }
+
+      cb.addEventListener('change', function () {
+        var state = loadCheckboxState();
+        if (cb.checked) {
+          li.classList.add('task-done');
+          state[id] = Date.now();
+        } else {
+          li.classList.remove('task-done');
+          delete state[id];
+        }
+        saveCheckboxState(state);
+        updateDayBadge(dayEl);
+      });
+
+      li.insertBefore(cb, li.firstChild);
+    });
+
+    updateDayBadge(dayEl);
+  });
+})();
+
+// ── Study time recorder ──────────────────────────────────────────────────────
+
+var TIMER_KEY = 'study-timer';
+
+/** Load timer state: { elapsed: ms, running: boolean, startedAt: timestamp|null } */
+function loadTimerState() {
+  try {
+    var s = JSON.parse(localStorage.getItem(TIMER_KEY));
+    return s && typeof s.elapsed === 'number' ? s : { elapsed: 0, running: false, startedAt: null };
+  } catch (e) { return { elapsed: 0, running: false, startedAt: null }; }
+}
+
+function saveTimerState(state) {
+  localStorage.setItem(TIMER_KEY, JSON.stringify(state));
+}
+
+/** Format milliseconds into HH:MM:SS. */
+function formatTime(ms) {
+  var totalSec = Math.floor(ms / 1000);
+  var h = Math.floor(totalSec / 3600);
+  var m = Math.floor((totalSec % 3600) / 60);
+  var s = totalSec % 60;
+  return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+(function initTimer() {
+  var bar = document.createElement('div');
+  bar.className = 'timer-bar';
+
+  var display = document.createElement('span');
+  display.className = 'timer-display';
+  display.textContent = '00:00:00';
+
+  var btnStart = document.createElement('button');
+  btnStart.className = 'btn-action btn-timer';
+  btnStart.textContent = '▶ Start';
+
+  var btnReset = document.createElement('button');
+  btnReset.className = 'btn-action btn-timer btn-timer-reset';
+  btnReset.textContent = '↺ Reset';
+
+  bar.appendChild(document.createTextNode('⏱️ Study Time: '));
+  bar.appendChild(display);
+  bar.appendChild(btnStart);
+  bar.appendChild(btnReset);
+
+  var subtitle = alevelMath1.querySelector('.section-subtitle');
+  subtitle.parentNode.insertBefore(bar, subtitle.nextSibling);
+
+  var timerInterval = null;
+  var state = loadTimerState();
+
+  function currentElapsed() {
+    if (state.running && state.startedAt) {
+      return state.elapsed + (Date.now() - state.startedAt);
+    }
+    return state.elapsed;
+  }
+
+  function render() {
+    display.textContent = formatTime(currentElapsed());
+  }
+
+  function startTicking() {
+    if (timerInterval) return;
+    timerInterval = setInterval(render, 1000);
+  }
+
+  function stopTicking() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  // Restore state on load
+  if (state.running) {
+    btnStart.textContent = '⏸ Pause';
+    startTicking();
+  }
+  render();
+
+  btnStart.addEventListener('click', function () {
+    if (state.running) {
+      // Pause
+      state.elapsed = currentElapsed();
+      state.running = false;
+      state.startedAt = null;
+      btnStart.textContent = '▶ Start';
+      stopTicking();
+    } else {
+      // Start
+      state.running = true;
+      state.startedAt = Date.now();
+      btnStart.textContent = '⏸ Pause';
+      startTicking();
+    }
+    saveTimerState(state);
+    render();
+  });
+
+  btnReset.addEventListener('click', function () {
+    state.elapsed = 0;
+    state.running = false;
+    state.startedAt = null;
+    btnStart.textContent = '▶ Start';
+    stopTicking();
+    saveTimerState(state);
+    render();
+  });
+})();
