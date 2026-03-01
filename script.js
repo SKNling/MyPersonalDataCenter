@@ -13,6 +13,7 @@ document.querySelector('a[href="#math"]').addEventListener('click', function (e)
   e.preventDefault();
   menuEl.classList.add('hidden');
   mathEl.classList.remove('hidden');
+  window.scrollTo(0, 0);
   generatePolynomial();
 });
 
@@ -20,12 +21,14 @@ document.querySelector('a[href="#alevel-math1"]').addEventListener('click', func
   e.preventDefault();
   menuEl.classList.add('hidden');
   alevelMath1.classList.remove('hidden');
+  window.scrollTo(0, 0);
 });
 
 backBtns.forEach(function (btn) {
   btn.addEventListener('click', function () {
     sections.forEach(function (s) { s.classList.add('hidden'); });
     menuEl.classList.remove('hidden');
+    window.scrollTo(0, 0);
   });
 });
 
