@@ -142,7 +142,13 @@ var worksheetPdfs = [
   'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 09 เวกเตอร์ [Lv.0].pdf',
   'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 09 เวกเตอร์ [Lv.2].pdf',
   'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 10 จำนวนเชิงซ้อน [Lv.0].pdf',
-  'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 10 จำนวนเชิงซ้อน [Lv.2].pdf'
+  'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 10 จำนวนเชิงซ้อน [Lv.2].pdf',
+  'worksheets/mock/math1/ข้อสอบ Unseen Mock Test คณิต1 ชุดพิเศษ 67.pdf',
+  'worksheets/mock/math2/ข้อสอบชุดที่1 I002 Unseen Mock Test คณิต2.pdf',
+  'worksheets/mock/math2/ข้อสอบชุดที่2 I002 Unseen Mock Test คณิต2.pdf',
+  'worksheets/mock/math2/ข้อสอบชุดที่3 I002 Unseen Mock Test คณิต2.pdf',
+  'worksheets/mock/math2/ข้อสอบชุดที่4 I002 Unseen Mock Test คณิต2(แก้ไข15มีค67).pdf',
+  'worksheets/mock/math2/ข้อสอบ Unseen Mock Test คณิต 2 (Vol.5).pdf'
 ];
 
 /** Normalize en-dash (–) spacing so schedule text ("A–Level") matches file names ("A – Level"). */
@@ -155,14 +161,23 @@ var worksheetLookup = {};
 worksheetPdfs.forEach(function (path) {
   var filename = path.split('/').pop();
   var name = filename.replace(/^สำเนาของ /, '').replace(/\.pdf$/, '');
+  name = name.replace(/\(แก้ไข[^)]*\)/g, '');
   worksheetLookup[normalizeWorksheetName(name)] = path;
 });
 
+/** Manual override: schedule text uses a different name than the actual PDF filename. */
+worksheetLookup[normalizeWorksheetName('Unseen MockTest 30ข้อ 90นาที')] =
+  'worksheets/mock/math1/ข้อสอบ Unseen Mock Test คณิต1 ชุดพิเศษ 67.pdf';
+
 /** Extract the core worksheet name from a schedule <li> text.
- *  Strips trailing metadata such as "(21ข้อ, 20นาที)" where ข้อ = items/questions. */
+ *  Strips trailing metadata such as "(21ข้อ, 20นาที)" where ข้อ = items/questions,
+ *  "(เต็มเวลาเหมือนสอบจริง)" for mock tests, and "(Math N Mock Test)" labels. */
 function extractWorksheetName(text) {
   return normalizeWorksheetName(
-    text.replace(/\s*\(\d+ข้อ[^)]*\)\s*$/, '').trim()
+    text.replace(/\s*\(\d+ข้อ[^)]*\)\s*$/, '')
+        .replace(/\s*\(เต็มเวลาเหมือนสอบจริง\)\s*$/, '')
+        .replace(/\s*\(Math \d+ Mock Test\)\s*$/, '')
+        .trim()
   );
 }
 
