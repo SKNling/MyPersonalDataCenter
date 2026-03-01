@@ -2,9 +2,12 @@
 
 // ── Section navigation ──────────────────────────────────────────────────────
 
-const menuEl   = document.querySelector('main.glass-panel');
-const mathEl   = document.getElementById('math-section');
-const backBtns = document.querySelectorAll('.btn-back');
+const menuEl      = document.querySelector('main.glass-panel');
+const mathEl      = document.getElementById('math-section');
+const alevelMath1 = document.getElementById('alevel-math1-section');
+const backBtns    = document.querySelectorAll('.btn-back');
+
+var sections = [mathEl, alevelMath1];
 
 document.querySelector('a[href="#math"]').addEventListener('click', function (e) {
   e.preventDefault();
@@ -13,9 +16,15 @@ document.querySelector('a[href="#math"]').addEventListener('click', function (e)
   generatePolynomial();
 });
 
+document.querySelector('a[href="#alevel-math1"]').addEventListener('click', function (e) {
+  e.preventDefault();
+  menuEl.classList.add('hidden');
+  alevelMath1.classList.remove('hidden');
+});
+
 backBtns.forEach(function (btn) {
   btn.addEventListener('click', function () {
-    mathEl.classList.add('hidden');
+    sections.forEach(function (s) { s.classList.add('hidden'); });
     menuEl.classList.remove('hidden');
   });
 });

@@ -233,3 +233,64 @@ footer {
   border-radius: 10px;
   padding: 0.75rem 1rem;
 }
+
+/* ── Schedule section ── */
+.schedule-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.schedule-day {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+}
+
+.day-heading {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.day-tasks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+}
+.day-tasks li {
+  color: rgba(255,255,255,0.78);
+  font-size: 0.92rem;
+  padding: 0.25rem 0 0.25rem 1.2rem;
+  position: relative;
+}
+.day-tasks li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: rgba(255,255,255,0.35);
+}
+
+.day-time {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 0.25rem;
+}
+
+/* Variant highlights */
+.schedule-review { border-color: rgba(255,200,50,0.3); }
+.schedule-mock   { border-color: rgba(255,100,100,0.35); }
+.schedule-rest   { border-color: rgba(100,200,255,0.3); }
+.schedule-exam   {
+  background: rgba(123,47,247,0.2);
+  border-color: rgba(123,47,247,0.5);
+  text-align: center;
+  padding: 1.5rem;
+}
+.schedule-exam .day-heading {
+  font-size: 1.15rem;
+  margin-bottom: 0;
+}
