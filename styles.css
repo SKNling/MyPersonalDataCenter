@@ -294,3 +294,16 @@ footer {
   font-size: 1.15rem;
   margin-bottom: 0;
 }
+
+/* ── Clickable worksheet links ── */
+.day-tasks li a.worksheet-link {
+  color: rgba(180, 200, 255, 0.92);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(180, 200, 255, 0.35);
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.day-tasks li a.worksheet-link:hover {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}

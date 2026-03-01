@@ -111,3 +111,73 @@ function factorStr(n) {
 // ── New equation button ──────────────────────────────────────────────────────
 
 document.getElementById('btn-new-equation').addEventListener('click', generatePolynomial);
+
+// ── Worksheet linking ────────────────────────────────────────────────────────
+
+/** All available worksheet PDFs (non-answer-key). */
+var worksheetPdfs = [
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 01 เซต [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 01 เซต [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 02 ตรรกศาสตร์ [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 02 ตรรกศาสตร์ [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 05 เอกซ์โพเนนเชียลและลอการิทึม [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 05 เอกซ์โพเนนเชียลและลอการิทึม [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 08 เมทริกซ์ [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 08 เมทริกซ์ [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ แบบทดสอบ คอร์ส พิชิต A – Level คณิต 1 เล่ม 1.pdf',
+  'worksheets/book2/สำเนาของ แบบฝึกหัดเสริมพลัง 11 การนับและความน่าจะเป็น [Lv.0].pdf',
+  'worksheets/book2/สำเนาของ แบบฝึกหัดเสริมพลัง 11 การนับและความน่าจะเป็น [Lv.1].pdf',
+  'worksheets/book2/สำเนาของ แบบฝึกหัดเสริมพลัง 12 ลำดับและอนุกรม [Lv.0].pdf',
+  'worksheets/book2/สำเนาของ แบบฝึกหัดเสริมพลัง 12 ลำดับและอนุกรม [Lv.1].pdf',
+  'worksheets/book2/สำเนาของ แบบฝึกหัดเสริมพลัง 13 แคลคูลัส [Lv.0].pdf',
+  'worksheets/book2/สำเนาของ แบบฝึกหัดเสริมพลัง 13 แคลคูลัส [Lv.1].pdf',
+  'worksheets/book2/สำเนาของ แบบฝึกหัดเสริมพลัง 14 สถิติและการแจกแจงความน่าจะเป็น [Lv.0].pdf',
+  'worksheets/book2/สำเนาของ แบบทดสอบ คอร์ส พิชิต A – Level คณิต 1 เล่ม 2 (ครั้งที่ 1).pdf',
+  'worksheets/book3/สำเนาของ Quiz A – Level คณิต 1 เล่ม 3 บทจำนวนเชิงซ้อน.pdf',
+  'worksheets/book3/สำเนาของ Quiz A – Level คณิต 1 เล่ม 3 บทเวกเตอร์.pdf',
+  'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 09 เวกเตอร์ [Lv.0].pdf',
+  'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 09 เวกเตอร์ [Lv.2].pdf',
+  'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 10 จำนวนเชิงซ้อน [Lv.0].pdf',
+  'worksheets/book3/สำเนาของ แบบฝึกหัดเสริมพลัง 10 จำนวนเชิงซ้อน [Lv.2].pdf'
+];
+
+/** Normalize en-dash (–) spacing so schedule text ("A–Level") matches file names ("A – Level"). */
+function normalizeWorksheetName(name) {
+  return name.replace(/A\s*\u2013\s*Level/g, 'A\u2013Level').trim();
+}
+
+/** Build lookup: normalized worksheet name → file path. */
+var worksheetLookup = {};
+worksheetPdfs.forEach(function (path) {
+  var filename = path.split('/').pop();
+  var name = filename.replace(/^สำเนาของ /, '').replace(/\.pdf$/, '');
+  worksheetLookup[normalizeWorksheetName(name)] = path;
+});
+
+/** Extract the core worksheet name from a schedule <li> text.
+ *  Strips trailing metadata such as "(21ข้อ, 20นาที)" where ข้อ = items/questions. */
+function extractWorksheetName(text) {
+  return normalizeWorksheetName(
+    text.replace(/\s*\(\d+ข้อ[^)]*\)\s*$/, '').trim()
+  );
+}
+
+/** Turn matching schedule items into clickable PDF links. */
+document.querySelectorAll('#alevel-math1-section .day-tasks li').forEach(function (li) {
+  var name = extractWorksheetName(li.textContent);
+  var pdfPath = worksheetLookup[name];
+  if (pdfPath) {
+    var link = document.createElement('a');
+    link.href = pdfPath;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.className = 'worksheet-link';
+    link.textContent = li.textContent;
+    li.textContent = '';
+    li.appendChild(link);
+  }
+});
