@@ -151,6 +151,43 @@ var worksheetPdfs = [
   'worksheets/mock/math2/ข้อสอบ Unseen Mock Test คณิต 2 (Vol.5).pdf'
 ];
 
+/** All available answer-key PDFs. */
+var answerPdfs = [
+  'worksheets/book1/สำเนาของ (เฉลย) แบบทดสอบ คอร์ส พิชิต A – Level คณิต 1 เล่ม 1.pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 01 เซต [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 01 เซต [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 02 ตรรกศาสตร์ [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 02 ตรรกศาสตร์ [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 05 เอกซ์โพเนนเชียลและลอการิทึม [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 05 เอกซ์โพเนนเชียลและลอการิทึม [Lv.1].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 08 เมทริกซ์ [Lv.0].pdf',
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 08 เมทริกซ์ [Lv.1].pdf',
+  'worksheets/book2/สำเนาของ เฉลยแบบทดสอบ คอร์ส พิชิต A – Level คณิต 1 เล่ม 2 (ครั้งที่ 1).pdf',
+  'worksheets/book2/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 11 การนับและความน่าจะเป็น [Lv.0].pdf',
+  'worksheets/book2/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 11 การนับและความน่าจะเป็น [Lv.1].pdf',
+  'worksheets/book2/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 12 ลำดับและอนุกรม [Lv.0].pdf',
+  'worksheets/book2/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 12 ลำดับและอนุกรม [Lv.1].pdf',
+  'worksheets/book2/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 13 แคลคูลัส [Lv.0].pdf',
+  'worksheets/book2/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 13 แคลคูลัส [Lv.1].pdf',
+  'worksheets/book2/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 14 สถิติและการแจกแจงความน่าจะเป็น [Lv.0].pdf',
+  'worksheets/book3/สำเนาของ (เฉลย) Quiz A – Level คณิต 1 เล่ม 3 บทจำนวนเชิงซ้อน.pdf',
+  'worksheets/book3/สำเนาของ (เฉลย) Quiz A – Level คณิต 1 เล่ม 3 บทเวกเตอร์.pdf',
+  'worksheets/book3/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 09 เวกเตอร์ [Lv.0].pdf',
+  'worksheets/book3/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 09 เวกเตอร์ [Lv.2].pdf',
+  'worksheets/book3/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 10 จำนวนเชิงซ้อน [Lv.0].pdf',
+  'worksheets/book3/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 10 จำนวนเชิงซ้อน [Lv.2].pdf',
+  'worksheets/mock/math1/เฉลยคำตอบ_Mock A-Level คณิต 1 (ชุดพิเศษ ปี 67).pdf',
+  'worksheets/mock/math2/เฉลยคำตอบชุดที่1 I002 Unseen Mock Test คณิต2.pdf',
+  'worksheets/mock/math2/เฉลยคำตอบชุดที่2 I002 Unseen Mock Test คณิต2.pdf',
+  'worksheets/mock/math2/เฉลยคำตอบชุดที่3 I002 Unseen Mock Test คณิต2.pdf',
+  'worksheets/mock/math2/เฉลยคำตอบชุดที่4 I002 Unseen Mock Test คณิต2.pdf',
+  'worksheets/mock/math2/เฉลยคำตอบ Unseen Mock Test คณิต 2 (Vol.5).pdf'
+];
+
 /** Normalize en-dash (–) spacing so schedule text ("A–Level") matches file names ("A – Level"). */
 function normalizeWorksheetName(name) {
   return name.replace(/A\s*\u2013\s*Level/g, 'A\u2013Level').trim();
@@ -169,6 +206,28 @@ worksheetPdfs.forEach(function (path) {
 worksheetLookup[normalizeWorksheetName('Unseen MockTest 30ข้อ 90นาที')] =
   'worksheets/mock/math1/ข้อสอบ Unseen Mock Test คณิต1 ชุดพิเศษ 67.pdf';
 
+/** Strip answer-key indicators from a name to recover the base worksheet name. */
+function extractAnswerBaseName(name) {
+  name = name.replace(/^\(เฉลย\)\s*/, '');
+  name = name.replace(/^เฉลยคำตอบชุดที่/, 'ข้อสอบชุดที่');
+  name = name.replace(/^เฉลยคำตอบ\s*/, 'ข้อสอบ ');
+  name = name.replace(/^เฉลย/, '');
+  return normalizeWorksheetName(name);
+}
+
+/** Build lookup: normalized worksheet name → answer-key file path. */
+var answerLookup = {};
+answerPdfs.forEach(function (path) {
+  var filename = path.split('/').pop();
+  var name = filename.replace(/^สำเนาของ /, '').replace(/\.pdf$/, '');
+  name = name.replace(/\(แก้ไข[^)]*\)/g, '');
+  answerLookup[extractAnswerBaseName(name)] = path;
+});
+
+/** Manual override: math1 mock answer key has a completely different name. */
+answerLookup[normalizeWorksheetName('Unseen MockTest 30ข้อ 90นาที')] =
+  'worksheets/mock/math1/เฉลยคำตอบ_Mock A-Level คณิต 1 (ชุดพิเศษ ปี 67).pdf';
+
 /** Extract the core worksheet name from a schedule <li> text.
  *  Strips trailing metadata such as "(21ข้อ, 20นาที)" where ข้อ = items/questions,
  *  "(เต็มเวลาเหมือนสอบจริง)" for mock tests, and "(Math N Mock Test)" labels. */
@@ -181,7 +240,7 @@ function extractWorksheetName(text) {
   );
 }
 
-/** Turn matching schedule items into clickable PDF links. */
+/** Turn matching schedule items into clickable PDF links with answer-key links. */
 document.querySelectorAll('#alevel-math1-section .day-tasks li').forEach(function (li) {
   var name = extractWorksheetName(li.textContent);
   var pdfPath = worksheetLookup[name];
@@ -194,5 +253,18 @@ document.querySelectorAll('#alevel-math1-section .day-tasks li').forEach(functio
     link.textContent = li.textContent;
     li.textContent = '';
     li.appendChild(link);
+
+    var answerPath = answerLookup[name];
+    if (answerPath) {
+      var answerLink = document.createElement('a');
+      answerLink.href = answerPath;
+      answerLink.target = '_blank';
+      answerLink.rel = 'noopener';
+      answerLink.className = 'answer-link';
+      answerLink.textContent = '[เฉลย]';
+      answerLink.title = 'Answer Key';
+      li.appendChild(document.createTextNode(' '));
+      li.appendChild(answerLink);
+    }
   }
 });

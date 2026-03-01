@@ -307,3 +307,16 @@ footer {
   color: #fff;
   border-bottom-color: rgba(255, 255, 255, 0.6);
 }
+.day-tasks li a.answer-link {
+  color: rgba(127, 255, 176, 0.85);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-left: 0.4rem;
+  border-bottom: 1px dashed rgba(127, 255, 176, 0.3);
+  transition: color 0.2s, border-color 0.2s;
+}
+.day-tasks li a.answer-link:hover {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}
