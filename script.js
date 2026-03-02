@@ -331,7 +331,15 @@ function updateDayBadge(dayEl) {
         updateDayBadge(dayEl);
       });
 
-      li.insertBefore(cb, li.firstChild);
+      // Wrap existing li content in a task-label span so strikethrough
+      // applies only to the label text, not to input fields.
+      var label = document.createElement('span');
+      label.className = 'task-label';
+      while (li.firstChild) {
+        label.appendChild(li.firstChild);
+      }
+      li.appendChild(label);
+      li.insertBefore(cb, label);
     });
 
     updateDayBadge(dayEl);
@@ -383,6 +391,59 @@ function saveTaskTimes(times) {
           delete times[id];
         }
         saveTaskTimes(times);
+      });
+
+      wrapper.appendChild(input);
+      li.appendChild(wrapper);
+    });
+  });
+})();
+
+// ── Per-task score recording ─────────────────────────────────────────────────
+
+var TASK_SCORE_KEY = 'task-scores';
+
+/** Load saved per-task score values from localStorage. */
+function loadTaskScores() {
+  try { return JSON.parse(localStorage.getItem(TASK_SCORE_KEY)) || {}; } catch (e) { return {}; }
+}
+
+/** Save per-task score values to localStorage. */
+function saveTaskScores(scores) {
+  localStorage.setItem(TASK_SCORE_KEY, JSON.stringify(scores));
+}
+
+/** Inject score-recording text boxes beside each schedule task. */
+(function initTaskScoreInputs() {
+  var saved = loadTaskScores();
+  var days = document.querySelectorAll('#alevel-math1-section .schedule-day');
+
+  days.forEach(function (dayEl, dayIdx) {
+    var items = dayEl.querySelectorAll('.day-tasks li');
+    items.forEach(function (li, taskIdx) {
+      var id = 'd' + dayIdx + 't' + taskIdx;
+
+      var wrapper = document.createElement('span');
+      wrapper.className = 'task-score-wrapper';
+
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'task-score-input';
+      input.placeholder = 'Score';
+      input.title = 'Record your score (e.g. 18/20, 90%)';
+      input.dataset.taskId = id;
+      if (saved[id]) {
+        input.value = saved[id];
+      }
+
+      input.addEventListener('input', function () {
+        var scores = loadTaskScores();
+        if (input.value.trim()) {
+          scores[id] = input.value.trim();
+        } else {
+          delete scores[id];
+        }
+        saveTaskScores(scores);
       });
 
       wrapper.appendChild(input);
