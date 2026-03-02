@@ -349,11 +349,9 @@ footer {
   line-height: 1;
 }
 .day-tasks li.task-done {
-  text-decoration: line-through;
   opacity: 0.5;
 }
-.day-tasks li.task-done a.worksheet-link,
-.day-tasks li.task-done a.answer-link {
+.day-tasks li.task-done .task-label {
   text-decoration: line-through;
 }
 
@@ -382,6 +380,35 @@ footer {
   font-style: italic;
 }
 .task-time-input:focus {
+  border-color: rgba(180, 200, 255, 0.6);
+  background: rgba(255,255,255,0.12);
+}
+
+/* ── Per-task score input ── */
+.task-score-wrapper {
+  margin-left: 0.35rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.task-score-input {
+  width: 5.5rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.78rem;
+  font-family: inherit;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.task-score-input::placeholder {
+  color: rgba(255,255,255,0.3);
+  font-style: italic;
+}
+.task-score-input:focus {
   border-color: rgba(180, 200, 255, 0.6);
   background: rgba(255,255,255,0.12);
 }
