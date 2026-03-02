@@ -333,6 +333,8 @@ function updateDayBadge(dayEl) {
 
       // Wrap existing li content in a task-label span so strikethrough
       // applies only to the label text, not to input fields.
+      // NOTE: time & score inputs are appended later (after this IIFE),
+      // so they remain outside the label and avoid the line-through.
       var label = document.createElement('span');
       label.className = 'task-label';
       while (li.firstChild) {
