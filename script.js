@@ -121,8 +121,6 @@ var worksheetPdfs = [
   'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 02 ตรรกศาสตร์ [Lv.0].pdf',
   'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 02 ตรรกศาสตร์ [Lv.1].pdf',
   'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.0].pdf',
-  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.1].pdf',
-  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.0].pdf',
   'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.1].pdf',
   'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 05 เอกซ์โพเนนเชียลและลอการิทึม [Lv.0].pdf',
   'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 05 เอกซ์โพเนนเชียลและลอการิทึม [Lv.1].pdf',
@@ -159,8 +157,6 @@ var answerPdfs = [
   'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 02 ตรรกศาสตร์ [Lv.0].pdf',
   'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 02 ตรรกศาสตร์ [Lv.1].pdf',
   'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.0].pdf',
-  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.1].pdf',
-  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.0].pdf',
   'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.1].pdf',
   'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 05 เอกซ์โพเนนเชียลและลอการิทึม [Lv.0].pdf',
   'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 05 เอกซ์โพเนนเชียลและลอการิทึม [Lv.1].pdf',
@@ -206,6 +202,13 @@ worksheetPdfs.forEach(function (path) {
 worksheetLookup[normalizeWorksheetName('Unseen MockTest 30ข้อ 90นาที')] =
   'worksheets/mock/math1/ข้อสอบ Unseen Mock Test คณิต1 ชุดพิเศษ 67.pdf';
 
+/** Rewritten links for worksheets 03 จำนวนจริง [Lv.1] and 04 ความสัมพันธ์ฯ [Lv.0]
+ *  to fix stale DNS links (issue #26). */
+worksheetLookup[normalizeWorksheetName('แบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.1]')] =
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.1].pdf';
+worksheetLookup[normalizeWorksheetName('แบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.0]')] =
+  'worksheets/book1/สำเนาของ แบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.0].pdf';
+
 /** Strip answer-key indicators from a name to recover the base worksheet name. */
 function extractAnswerBaseName(name) {
   name = name.replace(/^\(เฉลย\)\s*/, '');
@@ -227,6 +230,13 @@ answerPdfs.forEach(function (path) {
 /** Manual override: math1 mock answer key has a completely different name. */
 answerLookup[normalizeWorksheetName('Unseen MockTest 30ข้อ 90นาที')] =
   'worksheets/mock/math1/เฉลยคำตอบ_Mock A-Level คณิต 1 (ชุดพิเศษ ปี 67).pdf';
+
+/** Rewritten answer-key links for worksheets 03 จำนวนจริง [Lv.1] and 04 ความสัมพันธ์ฯ [Lv.0]
+ *  to fix stale DNS links (issue #26). */
+answerLookup[normalizeWorksheetName('แบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.1]')] =
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 03 จำนวนจริง [Lv.1].pdf';
+answerLookup[normalizeWorksheetName('แบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.0]')] =
+  'worksheets/book1/สำเนาของ เฉลยแบบฝึกหัดเสริมพลัง 04 ความสัมพันธ์และฟังก์ชัน [Lv.0].pdf';
 
 /** Extract the core worksheet name from a schedule <li> text.
  *  Strips trailing metadata such as "(21ข้อ, 20นาที)" where ข้อ = items/questions,
